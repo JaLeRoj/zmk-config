@@ -23,3 +23,4 @@ include:
     shield: redox_left
   - board: nrfmicro_11
     shield: redox_right
+    artifact-name: firmware
