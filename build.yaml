@@ -25,6 +25,7 @@
   #   shield: redox_right
   #   artifact-name: firmware
 
+---
 include:
   - board: nrfmicro_11
     shield: redox_left
