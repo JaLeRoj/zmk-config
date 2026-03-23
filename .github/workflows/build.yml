@@ -1,6 +1,22 @@
 name: Build ZMK firmware
 on: [push, pull_request, workflow_dispatch]
 
+# jobs:
+#   build:
+#     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.3
+
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.3
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        board: [nrfmicro_11] # O la placa que estés usando
+        shield: [redox_left, redox_right]
+    steps:
+      - name: Build ZMK
+        uses: zmkfirmware/zmk-build-action@v3
+        with:
+          board: ${{ matrix.board }}
+          shield: ${{ matrix.shield }}
+          # Esto fuerza a Zephyr a generar el .hex además del .uf2
+          cmake-args: -DCONFIG_BUILD_OUTPUT_HEX=y
